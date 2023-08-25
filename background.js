@@ -1,3 +1,7 @@
+if (!('browser' in self)) {
+  self.browser = self.chrome;
+}
+
 async function toggleCookieIframeInjector(cookie) {
   var cookie =
     cookie !== undefined
