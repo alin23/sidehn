@@ -5,3 +5,9 @@
 </p>
 
 Browser extenstion that shows a sidebar with [Hacker News](https://news.ycombinator.com/news) comments if the link was opened from HN.
+
+*light mode*
+![light comments sidebar](https://files.alinpanaitiu.com/side-hn-light.jpeg)
+
+*with [Dark Reader](https://darkreader.org/)*
+![dark comments sidebar](https://files.alinpanaitiu.com/side-hn-dark.jpeg)
