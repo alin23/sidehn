@@ -1,6 +1,10 @@
 window.addHNComments = (id) => {
   // Create the iframe element
+  if (document.getElementById("hn-iframe")) {
+    return;
+  }
   const iframe = document.createElement("iframe");
+  iframe.id = "hn-iframe";
   const bodyStyle = getComputedStyle(document.body);
 
   // Set the source of the iframe to the Hacker News comments page for the given URL
@@ -120,26 +124,53 @@ window.addHNComments = (id) => {
   toggleIframe();
 };
 
-if (location.hostname == "news.ycombinator.com") {
-  // if we're on HN, add the item ID to the URL as a hash fragment
-  window.hnObserver = new MutationObserver(() => {
-    const hnItems = document.querySelectorAll(".hn-item");
-    hnItems.forEach((item) => {
-      const link = item.querySelector("a.hn-item-title");
-      if (!link.href.includes("news.ycombinator.com")) {
-        link.href = link.href.replace(/#hnid=\d+/, "") + `#hnid=${item.id}`;
-      }
-    });
-  });
+function addHashIDs() {
+  var hnItems = document.querySelectorAll("tr.athing");
+  if (hnItems.length === 0) {
+    hnItems = document.querySelectorAll(".hn-item");
+  }
+  console.log(hnItems);
 
+  hnItems.forEach((item) => {
+    const link =
+      item.querySelector("span.titleline > a") ||
+      item.querySelector("a.hn-item-title");
+    if (!link.href.includes("news.ycombinator.com")) {
+      if (link.href.match(/([?&])hnid=\d+/)) {
+        link.href = link.href.replace(/([?&])hnid=\d+/, `$1hnid=${item.id}`);
+      } else if (link.href.includes("?")) {
+        link.href += `&hnid=${item.id}`;
+      } else {
+        link.href += `?hnid=${item.id}`;
+      }
+    }
+  });
+}
+
+async function setup() {
+  const settings = await browser.storage.sync.get("disabledDomains");
+
+  if (location.hostname !== "news.ycombinator.com") {
+    if (
+      settings.disabledDomains &&
+      settings.disabledDomains[location.hostname]
+    ) {
+      return;
+    }
+
+    const hnidMatch = location.search.match(/[?&]hnid=(\d+)/);
+    if (hnidMatch) {
+      window.addHNComments(hnidMatch[1]);
+    }
+    return;
+  }
+
+  window.hnObserver = new MutationObserver(addHashIDs);
   window.hnObserver.observe(document.body, {
     childList: true,
     subtree: true,
   });
-} else {
-  // otherwise, check if we got here from HN and add the comments sidebar
-  const hnidMatch = location.hash.match(/hnid=(\d+)/);
-  if (hnidMatch) {
-    window.addHNComments(hnidMatch[1]);
-  }
+  addHashIDs();
 }
+
+setup();

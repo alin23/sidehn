@@ -1,19 +1,30 @@
 {
   "manifest_version": 3,
   "name": "SideHN",
-  "version": "0.2",
+  "version": "1.0",
   "description": "The web, with a side of HackerNews. Shows a sidebar with HN comments if the link was opened from HN",
   "author": "Alin Panaitiu",
+  "homepage_url": "https://github.com/alin23/sidehn",
   "icons": {
     "16": "icon@16.png",
     "48": "icon@48.png",
     "128": "icon@128.png"
   },
-  "host_permissions": ["<all_urls>"],
+  "background": {
+    "scripts": ["browser-polyfill.min.js", "background.js"]
+  },
+  "host_permissions": ["https://news.ycombinator.com/*", "*://*/*?*hnid=*"],
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "declarativeNetRequest",
+    "cookies"
+  ],
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["script.js"],
+      "matches": ["https://news.ycombinator.com/*", "*://*/*?*hnid=*"],
+      "js": ["browser-polyfill.min.js", "script.js"],
       "run_at": "document_end"
     }
   ],
@@ -23,5 +34,23 @@
       "id": "sidehn@alinpanaitiu.com",
       "strict_min_version": "101.0"
     }
+  },
+  "action": {
+    "default_icon": {
+      "16": "icon@16.png",
+      "48": "icon@48.png",
+      "128": "icon@128.png"
+    },
+    "default_title": "SideHN",
+    "default_popup": "popup.html"
+  },
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "ruleset",
+        "enabled": true,
+        "path": "rules.json"
+      }
+    ]
   }
 }

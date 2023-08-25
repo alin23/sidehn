@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>SideHN</title>
+    <style type="text/css">
+      body {
+        min-width: 240px;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+      }
+      h1 {
+        font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono",
+          "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
+          "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New",
+          monospace;
+      }
+      button {
+        background: #ffc39b;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #ffa569;
+      }
+      button#permissions {
+        display: none;
+      }
+      button#toggle-host {
+        display: none;
+      }
+      a {
+        color: #ffa569;
+        text-decoration: none;
+        font-size: 0.8em;
+        cursor: pointer;
+        display: none;
+        font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono",
+        "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace",
+        "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New",
+        monospace;
+      }
+      a:hover {
+        text-decoration: underline;
+        color: #ffc39b;
+      }
+      a#ltg-link {
+        color: #999;
+        font-size: 0.6em;
+        margin-top: auto;
+        font-weight: 500;
+      }
+    </style>
+    <script type="application/javascript" src="browser-polyfill.min.js"></script>
+  </head>
+  <body>
+    <h1>SideHN</h1>
+    <button id="permissions">Grant permissions</button>
+    <button id="toggle-host">Disable on current tab</button>
+    <a href="https://github.com/alin23/sidehn" id="source-code-link">Source code</a>
+    <a href="https://lowtechguys.com/" id="ltg-link">by "The low-tech guys"</a>
+    <script src="popup.js"></script>
+  </body>
+</html>
