@@ -4,7 +4,11 @@
     <h4 align="center" style="padding: 0; margin: 0; font-family: ui-monospace, monospace;">The web, with a side of Hacker News</h4>
 </p>
 
-Browser extenstion that shows a sidebar with [Hacker News](https://news.ycombinator.com/news) comments if the link was opened from HN.
+Browser extension that shows a sidebar with [Hacker News](https://news.ycombinator.com/news) comments if the link was opened from HN.
+
+[![add-to-chrome](https://files.alinpanaitiu.com/add-to-chrome.png)](https://chrome.google.com/webstore/detail/onhcdbnmlldkpneodnponijjndidkgph)
+
+[![add-to-firefox](https://files.alinpanaitiu.com/add-to-firefox.png)](https://addons.mozilla.org/en-US/firefox/addon/sidehn/)
 
 *light mode*
 ![light comments sidebar](https://files.alinpanaitiu.com/side-hn-light.jpeg)
